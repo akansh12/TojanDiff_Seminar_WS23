@@ -1,1 +1,1 @@
-# TojanDiff_Seminar_WS23
+# TrojanDiff_Seminar_WS23
