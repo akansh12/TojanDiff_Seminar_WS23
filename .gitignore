@@ -1,4 +1,5 @@
 data/
 weights/
 model_weights/
-images/
+images/samples_benign
+images/samples_trojan_benign
