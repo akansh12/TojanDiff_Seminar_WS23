@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+#Reference for implementing the U-Net model: https://github.com/explainingai-code/DDPM-Pytorch/blob/main/models/unet_base.py
 
 def get_time_embedding(time_steps, temb_dim):
     r"""
@@ -368,6 +369,44 @@ class Unet(nn.Module):
 
 #### model for trojan Attack
 class LeNet(nn.Module):
+    """
+    LeNet-5 Convolutional Neural Network architecture.
+
+    This class implements the LeNet-5 architecture, which is a classic convolutional neural network
+    designed for handwritten digit recognition.
+
+    Architecture:
+    - Conv1: Convolutional layer with 6 filters of size 5x5, followed by ReLU activation.
+    - Pool1: Max pooling layer with kernel size 2x2 and stride 2.
+    - Conv2: Convolutional layer with 16 filters of size 5x5, followed by ReLU activation.
+    - Pool2: Max pooling layer with kernel size 2x2 and stride 2.
+    - FC1: Fully connected layer with 120 output features, followed by ReLU activation.
+    - FC2: Fully connected layer with 84 output features, followed by ReLU activation.
+    - FC3: Fully connected layer with 10 output features (corresponding to class scores).
+
+    Args:
+    - None
+
+    Attributes:
+    - conv1 (nn.Conv2d): First convolutional layer.
+    - relu1 (nn.ReLU): First ReLU activation function.
+    - pool1 (nn.MaxPool2d): First max pooling layer.
+    - conv2 (nn.Conv2d): Second convolutional layer.
+    - relu2 (nn.ReLU): Second ReLU activation function.
+    - pool2 (nn.MaxPool2d): Second max pooling layer.
+    - fc1 (nn.Linear): First fully connected layer.
+    - relu3 (nn.ReLU): Third ReLU activation function.
+    - fc2 (nn.Linear): Second fully connected layer.
+    - relu4 (nn.ReLU): Fourth ReLU activation function.
+    - fc3 (nn.Linear): Third fully connected layer.
+
+    Methods:
+    - forward(x): Performs forward pass through the network.
+
+    Returns:
+    - x (torch.Tensor): Output tensor after passing through the network.
+    """
+    
     def __init__(self):
         super(LeNet, self).__init__()
         self.conv1 = nn.Conv2d(1, 6, kernel_size=5)
@@ -383,6 +422,15 @@ class LeNet(nn.Module):
         self.fc3 = nn.Linear(84, 10)
 
     def forward(self, x):
+        """
+        Performs forward pass through the LeNet architecture.
+
+        Args:
+        - x (torch.Tensor): Input tensor with shape (batch_size, channels, height, width).
+
+        Returns:
+        - x (torch.Tensor): Output tensor after passing through the network.
+        """
         x = self.conv1(x)
         x = self.relu1(x)
         x = self.pool1(x)
